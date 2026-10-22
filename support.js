@@ -991,6 +991,7 @@
         this.__needsDidMount = true;
       }
       componentDidMount() {
+        this.__previousLogicState = { ...this.logic.state };
         registry.get(this.__name).subs.add(this.__sub);
         try {
           this.logic.componentDidMount();
@@ -999,6 +1000,8 @@
         }
       }
       componentDidUpdate(prevProps) {
+        const previousLogicState = this.__previousLogicState || { ...this.logic.state };
+        this.__previousLogicState = { ...this.logic.state };
         this.logic.props = this.__userProps();
         if (this.__needsDidMount) {
           if (this.state.__err || !registry.get(this.__name).tpl) return;
@@ -1010,7 +1013,7 @@
           }
         } else {
           try {
-            this.logic.componentDidUpdate(prevProps);
+            this.logic.componentDidUpdate(prevProps, previousLogicState);
           } catch (e) {
             console.error(e);
           }
