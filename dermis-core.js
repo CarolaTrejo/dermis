@@ -410,5 +410,126 @@ function rankLooks(colors) {
   return OUT_LOOKS.slice().sort((a, b) => score[b.key] - score[a.key]);
 }
 
-window.DX = { GUIDE, ANALYSIS, A, FACE, MK, BR, PRODS, BTOOLS, COLL_CATS, KIND, LOOKS, FEATURED, OUT_LOOKS, BROW_NAMES, BROW_STYLES, BROW_TONES, ROUTINE, VB, ctr, faceSvg, mirrorSvg, statuses, icon, fileToData, dominantColors, toHex, rankLooks };
+
+/* ---------- guías AR (sistema de guías del HTML de referencia, sobre MediaPipe Face Landmarker) ---------- */
+const AR = (() => {
+const OVAL = [10,338,297,332,284,251,389,356,454,323,361,288,397,365,379,378,400,377,152,148,176,149,150,136,172,58,132,93,234,127,162,21,54,103,67,109];
+const LIPS = [61,146,91,181,84,17,314,405,321,375,291,409,270,269,267,0,37,39,40,185];
+const LIP_R = [61,146,91,181,84,17,0,37,39,40,185];
+const LIP_L = [17,314,405,321,375,291,409,270,269,267,0];
+const SD = {
+  R: { eo:33, ei:133, ch:50, ear:234, ear2:132, tmp:127, cb:117, mc:61, nw:129, ll:145, ul:159, up:[33,246,161,160,159,158,157,173,133], lo:[33,7,163,144,145,153,154,155,133], bu:[70,63,105,66,107], bl:[46,53,52,65,55], arch:105, w:{m:'derecho', f:'derecha'} },
+  L: { eo:263, ei:362, ch:280, ear:454, ear2:361, tmp:356, cb:346, mc:291, nw:358, ll:374, ul:386, up:[263,466,388,387,386,385,384,398,362], lo:[263,249,390,373,374,380,381,382,362], bu:[300,293,334,296,336], bl:[276,283,282,295,285], arch:334, w:{m:'izquierdo', f:'izquierda'} }
+};
+const lerp=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
+const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+const cen=p=>{let x=0,y=0;p.forEach(q=>{x+=q[0];y+=q[1]});return[x/p.length,y/p.length]};
+const scl=(p,c,k)=>p.map(q=>[c[0]+(q[0]-c[0])*k,c[1]+(q[1]-c[1])*k]);
+const ell=(c,a,b,ang,n=28)=>{const o=[];for(let i=0;i<n;i++){const t=i/n*Math.PI*2,x=Math.cos(t)*a,y=Math.sin(t)*b;o.push([c[0]+x*Math.cos(ang)-y*Math.sin(ang),c[1]+x*Math.sin(ang)+y*Math.cos(ang)])}return o};
+const band=(a,b,w0,w1)=>{const d=[b[0]-a[0],b[1]-a[1]],L=Math.hypot(...d)||1,n=[-d[1]/L,d[0]/L],o=[];const N=10;for(let i=0;i<=N;i++){const t=i/N,p=lerp(a,b,t),w=(w0+(w1-w0)*t)*Math.sin(Math.PI*(0.15+0.85*t))/2;o.push([p[0]+n[0]*w,p[1]+n[1]*w])}for(let i=N;i>=0;i--){const t=i/N,p=lerp(a,b,t),w=(w0+(w1-w0)*t)*Math.sin(Math.PI*(0.15+0.85*t))/2;o.push([p[0]-n[0]*w,p[1]-n[1]*w])}return o};
+const ang=(a,b)=>Math.atan2(b[1]-a[1],b[0]-a[0]);
+const pip=(x,y,p)=>{let c=false;for(let i=0,j=p.length-1;i<p.length;j=i++){const a=p[i],b=p[j];if(((a[1]>y)!==(b[1]>y))&&(x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0]))c=!c}return c};
+const ease=t=>t<0?0:t>1?1:1-Math.pow(1-t,3);
+
+function browTarget(P,s,style,fw){
+  const S=SD[s], nw=P(S.nw), browY=cen(S.bu.map(P).concat(S.bl.map(P)))[1];
+  const ext=(a,b)=>{const t=(browY-a[1])/((b[1]-a[1])||1e-3);return lerp(a,b,Math.max(1,Math.min(t,3)))};
+  const iris=lerp(P(S.ul),P(S.ll),0.5);
+  const start=ext(nw,P(S.ei)), archB=ext(nw,lerp(iris,P(S.eo),0.45)), tail=ext(nw,P(S.eo));
+  const th=fw*0.04*style.thick, lift=fw*0.05*style.lift;
+  const arch=[archB[0],archB[1]-lift-th*0.3], tailP=[tail[0],tail[1]-th*0.2+lift*0.2];
+  const q=(a,c,b,t)=>[(1-t)*(1-t)*a[0]+2*(1-t)*t*c[0]+t*t*b[0],(1-t)*(1-t)*a[1]+2*(1-t)*t*c[1]+t*t*b[1]];
+  const ctrl=[2*arch[0]-(start[0]+tailP[0])/2,2*arch[1]-(start[1]+tailP[1])/2];
+  const up=[],lo=[];for(let i=0;i<=14;i++){const t=i/14,p=q(start,ctrl,tailP,t),w=th*(1-0.82*Math.pow(t,1.6));up.push([p[0],p[1]-w*0.6]);lo.push([p[0],p[1]+w*0.4])}
+  return {poly:up.concat(lo.reverse()),pts:{start,arch,tail:tailP,nw,iris,ei:P(S.ei),eo:P(S.eo)}};
+}
+
+function buildZones(key,P,o={}){
+  const fw=dist(P(234),P(454)), fh=dist(P(10),P(152)), z=[];
+  const oval=OVAL.map(P), nose=P(4);
+  if(key==='prep'){ z.push({id:'face',poly:scl(oval,nose,0.9),measure:false,flow:[[P(199),P(151)],[P(50),P(127)],[P(280),P(356)]].map(([a,b])=>[a,lerp(a,b,0.8)])}); return z; }
+  if(key==='base'){
+    const dots=[P(151),P(4),P(50),P(280),P(199)];
+    z.push({id:'face',poly:scl(oval,nose,0.88),measure:false,dots,flow:dots.map(d=>[d,lerp(nose,d,1.7)])});
+    for(const s of ['R','L']){const S=SD[s];z.push({id:'base'+s,pair:'base',side:s,hidden:true,name:'la mejilla '+S.w.f,poly:ell(lerp(P(S.ch),P(S.ear),0.3),fw*0.08,fw*0.06,0)})}
+    return z;
+  }
+  for(const s of ['R','L']){
+    const S=SD[s];
+    if(key==='concealer'){const lo=S.lo.map(P).map(q=>[q[0],q[1]+fh*0.025]);const apex=lerp(P(S.ll),P(S.ch),0.9);z.push({id:'conc'+s,pair:'conc',side:s,name:'debajo del ojo '+S.w.m,poly:lo.concat([apex]),dots:[lerp(P(S.ll),apex,0.35),lerp(P(S.ei),apex,0.45),lerp(P(S.eo),apex,0.3)],flow:[]})}
+    if(key==='contour'){const a=lerp(P(S.ear),P(S.ear2),0.4),b=lerp(a,P(S.mc),0.5);z.push({id:'cont'+s,pair:'cont',side:s,name:'el contorno '+S.w.m,poly:band(a,b,fw*0.075,fw*0.04),flow:[[a,b],[lerp(a,b,0.5),[lerp(a,b,0.5)[0],lerp(a,b,0.5)[1]-fh*0.07]]]})}
+    if(key==='blush'){const c0=lerp(P(S.ch),P(S.cb),0.5),t=P(S.tmp);let k=0.22,tt=t;if(o.shape==='Redondo'){k=0.3}if(o.shape==='Alargado'){tt=[t[0],c0[1]+(t[1]-c0[1])*0.45]}const an=ang(c0,tt),c=lerp(c0,tt,k);z.push({id:'blush'+s,pair:'blush',side:s,name:'el pómulo '+S.w.m,poly:ell(c,fw*0.115,fw*0.052,an),flow:[[c0,lerp(c0,t,0.6)]]})}
+    if(key==='highlight'){const c=lerp(P(S.cb),P(S.tmp),0.45);const cc=[c[0],c[1]-fh*0.03];z.push({id:'hl'+s,pair:'hl',side:s,name:'el pómulo '+S.w.m,metric:'L',poly:ell(cc,fw*0.07,fw*0.022,ang(P(S.cb),P(S.tmp))),flow:[[lerp(cc,P(S.cb),0.4),lerp(cc,P(S.tmp),0.4)]]});z.push({id:'hlb'+s,measure:false,poly:ell(lerp(P(S.bl[1]),P(S.eo),0.4),fw*0.03,fw*0.012,0),flow:[]})}
+    if(key==='eyes'){const up=S.up.map(P),bl=S.bl.map(P),idx=[0,2,4,6,8];const top=bl.map((b,i)=>lerp(up[idx[i]],b,0.55));z.push({id:'eye'+s,pair:'eye',side:s,name:'el párpado '+S.w.m,poly:up.concat(top.slice().reverse()),flow:[[top[0],top[4]]]})}
+    if(key==='lips'){const pts=(s==='R'?LIP_R:LIP_L).map(P);z.push({id:'lip'+s,pair:'lip',side:s,hidden:true,name:'el lado '+S.w.m+' del labio',poly:scl(pts,cen(pts),0.85)})}
+    if(key.startsWith('brow')){
+      const bp=S.bu.map(P).concat(S.bl.map(P).reverse());const tg=browTarget(P,s,o.browStyle||{lift:0.25,thick:1},fw);
+      z.push({id:'brow'+s,pair:'brow',side:s,name:'la ceja '+S.w.f,poly:key==='brow-fill'?tg.poly:bp,measure:key==='brow-fill',brow:tg,natural:bp,flow:key==='brow-set'?[[lerp(tg.pts.start,tg.pts.arch,0.2),[tg.pts.start[0],tg.pts.start[1]-fh*0.05]],[tg.pts.arch,lerp(tg.pts.arch,tg.pts.tail,0.7)]]:[]});
+    }
+  }
+  if(key==='highlight'){z.push({id:'nose',measure:false,poly:band(P(168),P(195),fw*0.03,fw*0.02),flow:[[P(168),P(195)]]});z.push({id:'cupid',measure:false,poly:ell(P(0),fw*0.025,fw*0.01,0),flow:[]})}
+  if(key==='lips'){z.push({id:'lips',measure:false,poly:LIPS.map(P),contour:true,flow:[[P(0),lerp(P(0),P(61),0.85)],[P(0),lerp(P(0),P(291),0.85)]]})}
+  return z;
+}
+
+
+  const KEY = { 'Preparación': 'prep', 'Base': 'base', 'Corrector': 'concealer', 'Contorno': 'contour', 'Rubor': 'blush', 'Iluminador': 'highlight', 'Ojos': 'eyes', 'Labios': 'lips', 'Depilación': 'brow-pluck', 'Forma': 'brow-shape', 'Relleno': 'brow-fill', 'Fijación': 'brow-set' };
+  const ZOOM = { 'Corrector': { p: [230, 450, .5], z: 1.6 }, 'Ojos': { p: [159, 386, .5], z: 1.75 }, 'Labios': { p: [13, 14, .5], z: 2 }, 'Depilación': { p: [105, 334, .5], z: 1.65 }, 'Forma': { p: [105, 334, .5], z: 1.5 }, 'Relleno': { p: [105, 334, .5], z: 1.65 }, 'Fijación': { p: [105, 334, .5], z: 1.65 },
+    'Rubor': { p: [50, 280, .5], z: 1.35, auto: false }, 'Contorno': { p: [4, 152, .25], z: 1.25, auto: false }, 'Iluminador': { p: [117, 346, .5], z: 1.35, auto: false } };
+  const res = (sp, P) => { if (typeof sp === 'number') return P(sp); const p = res(sp[0], P), q = res(sp[1], P), t = sp[2]; return [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]; };
+  const K = 1.0, LW = 1.5; // guías un poco más grandes y con trazo más visible que la referencia
+  const ALL = Array.from({ length: 478 }, (_, i) => i);
+  function build(host, name, W, H) {
+    host.innerHTML = '';
+    const key = KEY[name]; if (!key) return null;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cv = document.createElement('canvas'), d = window.devicePixelRatio || 1;
+    cv.width = Math.round(W * d); cv.height = Math.round(H * d); cv.style.cssText = 'position:absolute;left:0;top:0;width:' + W + 'px;height:' + H + 'px';
+    host.appendChild(cv);
+    const c = cv.getContext('2d'); let t0 = null; const FS = {};
+    const ELL = /^(blush|hl|cont|base)/;
+    function persp(z, poly, P, fac) {
+      const sd = z.side || ((z.id || '').match(/[RL]$/) || [])[0]; if (!sd) return { poly, a: 1 };
+      const f = fac[sd], a = f < 0.55 ? Math.max(0, (f - 0.3) / 0.25) : 1;
+      if (!ELL.test(z.id || '')) return { poly, a };
+      const A = P(234), B = P(454); let ux = B[0] - A[0], uy = B[1] - A[1]; const l = Math.hypot(ux, uy) || 1; ux /= l; uy /= l;
+      const cc = cen(poly), k = Math.min(1.08, f);
+      return { a, poly: poly.map(q => { const dx = q[0] - cc[0], dy = q[1] - cc[1], pr = dx * ux + dy * uy, d2 = pr * (k - 1); return [q[0] + ux * d2, q[1] + uy * d2]; }) };
+    }
+    function drawBrow(z, a, t, el) {
+      const s = key, b = z.brow, P = b.pts;
+      if (s === 'brow-pluck') { c.beginPath(); z.natural.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); c.fillStyle = `rgba(232,185,138,${0.22 * a})`; c.fill(); }
+      c.beginPath(); b.poly.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath();
+      if (s === 'brow-fill' || s === 'brow-set') { c.fillStyle = `rgba(201,181,245,${0.22 * a})`; c.fill(); }
+      c.setLineDash([3 * LW, 4 * LW]); c.lineDashOffset = -t / 60; c.strokeStyle = `rgba(236,226,255,${0.9 * a})`; c.lineWidth = 1.3 * LW; c.stroke(); c.setLineDash([]);
+      if (s === 'brow-shape') { [[P.nw, P.start], [P.nw, P.arch], [P.nw, P.tail]].forEach(([p0, p1], i) => { const k = ease((el - 0.3 * i) / 0.9); if (k <= 0) return; const e = lerp(p0, p1, k * 1.08); c.strokeStyle = `rgba(240,232,255,${0.7 * a})`; c.lineWidth = 1 * LW; c.beginPath(); c.moveTo(p0[0], p0[1]); c.lineTo(e[0], e[1]); c.stroke(); if (k >= 1) { c.fillStyle = `rgba(255,250,255,${a})`; c.beginPath(); c.arc(p1[0], p1[1], 3.2 * K, 0, 7); c.fill(); c.strokeStyle = `rgba(255,250,255,${0.5 * a})`; c.beginPath(); c.arc(p1[0], p1[1], (7 + 2 * Math.sin(t / 300)) * K, 0, 7); c.stroke(); } }); }
+      if (s === 'brow-fill') { for (let i = 0; i < 9; i++) { const u = i / 8, p = lerp(P.start, P.tail, u), ph = ((t / 1300) + i * 0.11) % 1, len = (8 + 6 * (1 - u)) * K; const an = -Math.PI / 2 + u * 1.2 * (z.side === 'R' ? 1 : -1) * -1; const q = [p[0] + Math.cos(an) * len * ease(ph), p[1] + Math.sin(an) * len * ease(ph)]; c.strokeStyle = `rgba(255,250,255,${Math.sin(Math.PI * ph) * 0.8 * a})`; c.lineWidth = 1.4 * LW; c.beginPath(); c.moveTo(p[0], p[1]); c.lineTo(q[0], q[1]); c.stroke(); } }
+      (z.flow || []).forEach(([p0, p1], fi) => { const s2 = ((t / 1400) + fi * 0.3) % 1, p = lerp(p0, p1, ease(s2)); c.fillStyle = `rgba(255,250,255,${Math.sin(Math.PI * s2) * a})`; c.beginPath(); c.arc(p[0], p[1], 2.6 * K, 0, 7); c.fill(); });
+    }
+    return { idx: ALL, zoom: ZOOM[name] || null, update(P) {
+      const t = performance.now(); if (t0 == null) t0 = t;
+      c.setTransform(d, 0, 0, d, 0, 0); c.clearRect(0, 0, W, H);
+      const el = reduce ? 99 : (t - t0) / 1000; const A = el < 5 ? 1 : Math.max(0.36, 1 - (el - 5) / 1.5 * 0.64);
+      const zs = buildZones(key, P, {});
+      const nz = P(4), hR = dist(nz, P(234)), hL = dist(nz, P(454)), av = (hR + hL) / 2 || 1, fac = {};
+      [['R', hR], ['L', hL]].forEach(([k2, h]) => { const v = Math.max(0.25, Math.min(1.2, h / av)); FS[k2] = FS[k2] == null ? v : FS[k2] + (v - FS[k2]) * 0.25; fac[k2] = FS[k2]; });
+      for (const z of zs) { if (z.hidden) continue;
+        const ph = ease(el / 1.1), pp = persp(z, z.poly, P, fac); if (pp.a <= 0.01) continue;
+        const a = A * pp.a, cc = cen(pp.poly), poly = scl(pp.poly, cc, (0.55 + 0.45 * ph) * K);
+        const col = '201,181,245';
+        c.save(); c.beginPath(); poly.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath();
+        if (z.brow) { drawBrow(z, a, t, el); c.restore(); continue; }
+        const r = Math.max(...poly.map(p => dist(p, cc))); const g = c.createRadialGradient(cc[0], cc[1], 0, cc[0], cc[1], r); g.addColorStop(0, `rgba(${col},${0.34 * a})`); g.addColorStop(1, `rgba(${col},${0.05 * a})`);
+        if (!z.contour) { c.fillStyle = g; c.fill(); }
+        const eye = /^eye/.test(z.id || ''); c.setLineDash(z.contour ? [] : eye ? [2.4 * LW, 4.4 * LW] : [3 * LW, 5 * LW]); c.lineDashOffset = -t / 60; c.strokeStyle = `rgba(236,226,255,${0.85 * a})`; c.lineWidth = (z.contour ? 1.5 : eye ? 0.85 : 1.3) * LW; c.stroke(); c.setLineDash([]);
+        (z.dots || []).forEach((p, i) => { const s = (t / 900 + i * 0.2) % 1; c.strokeStyle = `rgba(240,232,255,${(1 - s) * 0.9 * a})`; c.lineWidth = LW; c.beginPath(); c.arc(p[0], p[1], (3 + s * 10) * K, 0, 7); c.stroke(); c.fillStyle = `rgba(240,232,255,${0.9 * a})`; c.beginPath(); c.arc(p[0], p[1], 2.2 * K, 0, 7); c.fill(); });
+        if (el > 0.8) (z.flow || []).forEach(([p0, p1], fi) => { for (let k = 0; k < 3; k++) { const s = ((t / 1500) + k / 3 + fi * 0.13) % 1, e = ease(s), p = lerp(p0, p1, e), q = lerp(p0, p1, Math.max(0, e - 0.14)); const al = Math.sin(Math.PI * s) * a; c.strokeStyle = `rgba(255,250,255,${al * 0.7})`; c.lineWidth = (/^eye/.test(z.id || '') ? 1.3 : 2) * LW; c.lineCap = 'round'; c.beginPath(); c.moveTo(q[0], q[1]); c.lineTo(p[0], p[1]); c.stroke(); c.fillStyle = `rgba(255,250,255,${al})`; c.beginPath(); c.arc(p[0], p[1], 2.6 * K, 0, 7); c.fill(); } });
+        c.restore();
+      }
+    } };
+  }
+  return { build, res, ZOOM, has: n => !!KEY[n] };
+})();
+
+window.DX = { AR, GUIDE, ANALYSIS, A, FACE, MK, BR, PRODS, BTOOLS, COLL_CATS, KIND, LOOKS, FEATURED, OUT_LOOKS, BROW_NAMES, BROW_STYLES, BROW_TONES, ROUTINE, VB, ctr, faceSvg, mirrorSvg, statuses, icon, fileToData, dominantColors, toHex, rankLooks };
 })();

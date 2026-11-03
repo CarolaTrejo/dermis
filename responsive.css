@@ -1,0 +1,78 @@
+html, body { width:100%; height:100%; overscroll-behavior:none; }
+button { touch-action:manipulation; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline:3px solid #CFC6FF; outline-offset:3px; }
+[data-screen-label="DERMIS 2.0"] { --dm-safe-bottom:env(safe-area-inset-bottom, 0px); }
+[data-screen-label="Panel"] main { overscroll-behavior:contain; scrollbar-width:thin; }
+.dm-camera-card { max-height:calc(100% - 32px); overflow-y:auto; }
+@media (max-width:1100px) {
+  [data-screen-label="Aplicación"] { left:190px!important; max-width:calc(100% - 440px)!important; }
+  [data-screen-label="Panel"] { width:calc(100% - 48px)!important; max-width:none!important; }
+  [data-screen-label="Elegir rutina"] { width:calc(100% - 410px)!important; margin-left:190px!important; max-width:none!important; }
+  .dm-step-actions { gap:8px!important; }
+  .dm-step-actions>button { padding-right:12px!important; font-size:13px!important; }
+}
+@media (max-width:900px) {
+  .dm-brand { left:16px!important; top:max(16px,env(safe-area-inset-top))!important; font-size:17px!important; }
+  .dm-clock { top:12px!important; right:16px!important; }
+  .dm-clock>div:first-child { font-size:18px!important; }
+  .dm-camera-status { top:50px!important; max-width:calc(100% - 32px); font-size:11px!important; }
+  .dm-nav { left:12px!important; right:12px; top:94px!important; flex-direction:row!important; gap:6px!important; overflow-x:auto; padding-bottom:8px; }
+  .dm-nav button { height:42px!important; flex-shrink:0; width:max-content!important; padding-right:10px!important; gap:5px!important; font-size:12px!important; }
+  .dm-nav sc-for, .dm-nav sc-for>* { flex-shrink:0; width:max-content; }
+  .dm-nav button>span:first-child { width:26px!important; height:26px!important; flex-shrink:0; }
+  .dm-more { left:12px!important; top:144px!important; z-index:6; max-height:calc(100% - 170px); overflow:auto; background:rgba(30,20,52,.96)!important; }
+  [data-screen-label="Aplicación"] { left:16px!important; right:16px; top:150px!important; max-width:none!important; }
+  [data-screen-label="Aplicación"]>div:nth-child(2) { font-size:30px!important; }
+  [data-screen-label="Aplicación"]>div:nth-child(4) { font-size:14px!important; margin-top:8px!important; }
+  .dm-tools { right:12px!important; top:320px!important; gap:8px!important; max-height:calc(100% - 475px); overflow:auto; padding:4px; }
+  .dm-tools>button:first-child img { max-width:90px; max-height:110px; }
+  .dm-tools button { flex-shrink:0; }
+  .dm-step-actions { left:12px!important; right:12px; bottom:calc(12px + var(--dm-safe-bottom))!important; transform:none!important; display:grid!important; grid-template-columns:1fr 1fr; gap:8px!important; }
+  .dm-step-actions>button { width:100%; min-width:0; justify-content:center; padding:0 8px!important; font-size:12px!important; gap:5px!important; }
+  .dm-step-actions>button:nth-child(2) { grid-column:1 / -1; grid-row:1; }
+  .dm-step-actions>button>span { width:26px!important; height:26px!important; flex-shrink:0; }
+  .dm-note { bottom:calc(128px + var(--dm-safe-bottom))!important; width:calc(100% - 32px); white-space:normal!important; text-align:center; font-size:10px!important; }
+  [data-screen-label="Control por gestos"] { left:12px; right:auto!important; bottom:calc(160px + var(--dm-safe-bottom))!important; width:180px!important; padding:10px!important; }
+  .dm-zoom { right:12px!important; bottom:calc(160px + var(--dm-safe-bottom))!important; }
+  .dm-brow { left:12px!important; bottom:calc(310px + var(--dm-safe-bottom))!important; width:175px!important; max-height:180px; overflow:auto; padding:10px!important; }
+  [data-screen-label="Elegir rutina"], [data-screen-label="Pasos"] { left:12px!important; right:12px!important; top:148px!important; bottom:calc(12px + var(--dm-safe-bottom))!important; width:auto!important; margin:0!important; max-width:none!important; padding:18px!important; border-radius:24px!important; }
+  [data-screen-label="Panel"] { left:8px!important; right:8px!important; top:max(8px,env(safe-area-inset-top))!important; bottom:calc(8px + var(--dm-safe-bottom))!important; width:auto!important; max-width:none!important; border-radius:24px!important; }
+  [data-screen-label="Panel"] main { padding:78px 18px 24px!important; }
+  [data-screen-label="Panel"] main * { min-width:0; overflow-wrap:anywhere; }
+  [data-screen-label="Panel"] main button { max-width:100%; white-space:normal!important; }
+  [data-screen-label="Panel"]>button { top:16px!important; right:16px!important; }
+  [data-screen-label="Gestos y guías"] { padding-right:0!important; }
+  [data-screen-label="Panel"] [style*="display:grid"], .dm-modal [style*="display:grid"] { grid-template-columns:minmax(0,1fr)!important; }
+  [data-screen-label="Panel"] input, .dm-modal input { min-width:0; max-width:100%; box-sizing:border-box; }
+  [data-screen-label="Panel"] [style*="display:flex"], .dm-modal [style*="display:flex"] { min-width:0; flex-wrap:wrap; }
+  [data-screen-label="Cómo aplicarlo"] { left:8px!important; right:8px!important; top:8px!important; bottom:calc(8px + var(--dm-safe-bottom))!important; border-radius:24px!important; }
+  [data-screen-label="Cómo aplicarlo"]>div:first-child { padding:18px!important; gap:12px!important; flex-wrap:wrap; }
+  [data-screen-label="Cómo aplicarlo"]>div:nth-child(2) { padding:8px 18px 24px!important; }
+  [data-screen-label="Cómo aplicarlo"] [style*="display:grid"] { grid-template-columns:minmax(0,1fr)!important; }
+  [data-screen-label="Cómo aplicarlo"] [style*="display:flex"] { min-width:0; flex-wrap:wrap; }
+  .dm-modal-overlay { padding:0!important; }
+  .dm-modal { width:calc(100% - 16px)!important; max-width:none!important; max-height:calc(100% - 32px)!important; padding:22px 18px!important; border-radius:24px!important; }
+  .dm-camera-card { width:calc(100% - 32px)!important; max-width:none!important; padding:24px 20px!important; }
+  [data-screen-label="Finalización"], [data-screen-label="Comparar"] { max-width:calc(100% - 24px)!important; padding:20px!important; max-height:calc(100% - 100px); overflow:auto; }
+}
+@media (max-height:700px) and (max-width:900px) {
+  .dm-shell { overflow-y:auto!important; }
+  [data-screen-label="DERMIS 2.0"] { left:0!important; top:0!important; transform:none!important; }
+  [data-screen-label="Panel"], [data-screen-label="Cómo aplicarlo"] { position:fixed!important; top:8px!important; bottom:8px!important; }
+  .dm-modal-overlay { position:fixed!important; }
+  .dm-camera-card { position:fixed!important; max-height:calc(100dvh - 32px)!important; }
+}
+@media (max-height:600px) and (min-width:901px) {
+  .dm-brand { top:16px!important; }
+  .dm-clock { top:12px!important; }
+  .dm-camera-status { top:16px!important; }
+  .dm-nav { top:70px!important; gap:6px!important; }
+  [data-screen-label="Aplicación"] { top:76px!important; }
+  [data-screen-label="Aplicación"]>div:nth-child(2) { font-size:30px!important; }
+  .dm-tools { top:74px!important; max-height:calc(100% - 155px); overflow:auto; }
+  .dm-tools>button:first-child img { max-height:76px; }
+  [data-screen-label="Control por gestos"] { bottom:84px!important; padding:8px!important; }
+  .dm-step-actions { bottom:16px!important; }
+  .dm-note { bottom:76px!important; }
+  .dm-brow { max-height:calc(100% - 200px); overflow:auto; }
+}
