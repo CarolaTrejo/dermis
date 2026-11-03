@@ -39,7 +39,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   [data-screen-label="Panel"] { left:8px!important; right:8px!important; top:max(8px,env(safe-area-inset-top))!important; bottom:calc(8px + var(--dm-safe-bottom))!important; width:auto!important; max-width:none!important; border-radius:24px!important; }
   [data-screen-label="Panel"] main { padding:78px 18px 24px!important; }
   [data-screen-label="Panel"] main * { min-width:0; overflow-wrap:anywhere; }
-  [data-screen-label="Panel"] main button { max-width:100%; white-space:normal!important; }
+  [data-screen-label="Panel"] main button { max-width:100%; white-space:normal!important; overflow-wrap:normal; flex-wrap:nowrap!important; }
   [data-screen-label="Panel"]>button { top:16px!important; right:16px!important; }
   [data-screen-label="Gestos y guías"] { padding-right:0!important; }
   [data-screen-label="Panel"] [style*="display:grid"], .dm-modal [style*="display:grid"] { grid-template-columns:minmax(0,1fr)!important; }
