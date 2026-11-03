@@ -55,7 +55,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .dm-camera-card { width:calc(100% - 32px)!important; max-width:none!important; padding:24px 20px!important; }
   [data-screen-label="Finalización"], [data-screen-label="Comparar"] { max-width:calc(100% - 24px)!important; padding:20px!important; max-height:calc(100% - 100px); overflow:auto; }
 }
-@media (max-height:700px) and (max-width:900px) {
+@media (max-height:780px) and (max-width:900px) {
   .dm-shell { overflow-y:auto!important; }
   [data-screen-label="DERMIS 2.0"] { left:0!important; top:0!important; transform:none!important; }
   [data-screen-label="Panel"], [data-screen-label="Cómo aplicarlo"] { position:fixed!important; top:8px!important; bottom:8px!important; }
