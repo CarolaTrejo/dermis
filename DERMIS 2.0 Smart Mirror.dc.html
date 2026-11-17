@@ -248,14 +248,14 @@ input[type=range]{accent-color:#7B6EF6}
       <div style="font-size:14px;line-height:1.5;opacity:.86;margin-top:8px">{{ camMsg }}</div>
       <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap">
         <button onClick="{{ retryCam }}" style="height:44px;padding:0 20px 0 8px;border-radius:22px;background:linear-gradient(135deg,rgba(123,110,246,.94),rgba(167,152,252,.88));border:1px solid rgba(233,228,255,.85);box-shadow:0 0 0 3px rgba(185,174,250,.16),0 6px 20px rgba(123,110,246,.34);color:#FFFFFF;font-size:14.5px;font-weight:600;cursor:pointer;display:flex;gap:8px;align-items:center;white-space:nowrap;transition:all .25s" style-hover="box-shadow:0 0 0 3px rgba(185,174,250,.3),0 0 22px rgba(123,110,246,.55);transform:translateY(-1px)" style-active="transform:scale(.97)"><span style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center">{{ icCamSm }}</span>Activar cámara</button>
-
+        
       </div>
     </div>
   </sc-if>
 </div>
 <sc-if value="{{ how }}" hint-placeholder-val="{{ false }}">
 <div onClick="{{ closeHow }}" style="position:absolute;inset:0;background:rgba(12,6,24,.2);animation:dmFade .5s ease-out"></div>
-<div data-screen-label="Cómo aplicarlo" style="position:absolute;left:4%;right:4%;top:4.5%;bottom:4.5%;display:flex;flex-direction:column;overflow:hidden;color:#FFFFFF;border-radius:34px;background:linear-gradient(160deg,rgba(62,46,104,.5),rgba(22,14,40,.6));backdrop-filter:blur(34px) saturate(150%);-webkit-backdrop-filter:blur(34px) saturate(150%);border:1px solid rgba(207,198,255,.42);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 0 0 4px rgba(185,174,250,.08),0 0 60px rgba(123,110,246,.3),0 40px 100px rgba(6,3,16,.55);animation:dmPop .4s cubic-bezier(.2,.8,.2,1)">
+<div data-screen-label="Cómo aplicarlo" style="position:absolute;left:4%;right:4%;top:4.5%;bottom:4.5%;display:flex;flex-direction:column;overflow:hidden;color:#FFFFFF;border-radius:34px;background:linear-gradient(160deg,rgba(62,46,104,.42),rgba(22,14,40,.52));backdrop-filter:blur(30px) saturate(150%);-webkit-backdrop-filter:blur(30px) saturate(150%);border:1px solid rgba(207,198,255,.34);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 36px rgba(123,110,246,.16),0 24px 60px rgba(6,3,16,.32);animation:dmPop .4s cubic-bezier(.2,.8,.2,1)">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;padding:28px 40px 18px">
     <div>
       <div style="font-size:12px;letter-spacing:.2em;color:#CFC6FF;font-weight:600">{{ howEyebrow }}</div>
@@ -306,7 +306,7 @@ input[type=range]{accent-color:#7B6EF6}
           <div style="display:flex;gap:10px;align-items:center;font-size:16px;font-weight:600;color:#E9E4FF">{{ icSpark }}{{ tipTitle }}</div>
           <div style="font-size:15.5px;line-height:1.6;margin-top:10px;color:rgba(255,255,255,.88);text-wrap:pretty">{{ cur.tip }}</div>
         </div>
-
+        
         <div>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
             <div style="font-size:11.5px;letter-spacing:.18em;color:rgba(233,228,255,.7);font-weight:600">PRODUCTOS RECOMENDADOS</div>
@@ -336,7 +336,7 @@ input[type=range]{accent-color:#7B6EF6}
 </div>
 </sc-if>
 <div onClick="{{ closePanel }}" style="position:absolute;inset:0;display:{{ consultaDisplay }};background:rgba(12,6,24,.18);animation:dmFade .5s ease-out"></div>
-<div data-screen-label="Panel" style="position:absolute;top:5%;bottom:5%;left:0;right:0;margin:0 auto;width:{{ panelW }};max-width:calc(100% - 80px);display:{{ consultaDisplay }};overflow:hidden;border-radius:34px;background:linear-gradient(160deg,rgba(250,248,255,.68),rgba(236,231,252,.56));backdrop-filter:blur(36px) saturate(160%);-webkit-backdrop-filter:blur(30px) saturate(150%);border:1px solid rgba(255,255,255,.72);box-shadow:0 0 0 1px rgba(185,174,250,.35),0 0 40px rgba(123,110,246,.22),0 28px 80px rgba(16,8,40,.45),inset 0 1px 0 rgba(255,255,255,.95);animation:{{ panelAnim }}">
+<div data-screen-label="Panel" style="position:absolute;top:5%;bottom:5%;left:0;right:0;margin:0 auto;width:{{ panelW }};max-width:calc(100% - 80px);display:{{ consultaDisplay }};overflow:hidden;border-radius:34px;background:linear-gradient(160deg,rgba(250,248,255,.6),rgba(236,231,252,.46));backdrop-filter:blur(28px) saturate(150%);-webkit-backdrop-filter:blur(28px) saturate(150%);border:1px solid rgba(255,255,255,.6);box-shadow:0 0 0 1px rgba(185,174,250,.22),0 0 28px rgba(123,110,246,.12),0 18px 50px rgba(16,8,40,.24),inset 0 1px 0 rgba(255,255,255,.85);animation:{{ panelAnim }}">
   <div style="position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.95),rgba(255,255,255,0));pointer-events:none"></div>
   <button data-k="1" onClick="{{ closePanel }}" title="Volver al espejo" style="position:absolute;top:22px;right:22px;z-index:3;height:40px;padding:0 6px 0 14px;border-radius:20px;display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13.5px;white-space:nowrap;color:#4A3FC8;background:rgba(255,255,255,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(185,174,250,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 0 14px rgba(123,110,246,.14);transition:all .25s ease" style-hover="transform:translateY(-1px);box-shadow:0 0 0 3px rgba(185,174,250,.26),0 0 20px rgba(123,110,246,.4)" style-active="transform:scale(.97)">Volver al espejo<span style="width:30px;height:30px;border-radius:50%;background:#7B6EF6;color:#FFFFFF;display:flex;align-items:center;justify-content:center">{{ icCloseSm }}</span></button>
   <main style="position:absolute;inset:0;overflow-y:auto;padding:30px 34px 40px 34px;box-sizing:border-box">
@@ -951,8 +951,9 @@ class Component extends DCLogic {
   componentWillUnmount() { cancelAnimationFrame(this._raf); clearTimeout(this._sf); clearInterval(this._fitT); clearInterval(this._tick); clearInterval(this._dx); window.removeEventListener('resize', this.fit); window.removeEventListener('keydown', this._key); this.stopCam(); }
   componentDidUpdate(pp, ps) {
     const s = this.state, p = this.props;
-    { const gk = s.screen === 'apply' && window.DX ? s.mode + ':' + this.idx() + ':' + this.dims().join('x') : '';
-      if (this.gWrap && gk !== this._gk) { this._gk = gk; this._sp = null; this.ar = gk ? DX.AR.build(this.gWrap, this.steps()[this.idx()].name, ...this.dims()) : null; if (!gk) this.gWrap.innerHTML = ''; } }
+    { const lkN = window.DX ? (DX.LOOKS.find(l => l.ref === s.refImg || l.img === s.refImg) || {}).name || '' : '';
+      const gk = s.screen === 'apply' && window.DX ? s.mode + ':' + this.idx() + ':' + this.dims().join('x') + ':' + lkN : '';
+      if (this.gWrap && gk !== this._gk) { this._gk = gk; this._sp = null; this.ar = gk ? DX.AR.build(this.gWrap, this.steps()[this.idx()].name, ...this.dims(), { look: lkN }) : null; if (!gk) [...this.gWrap.children].forEach(ch => { ch.style.transition = 'opacity .5s ease'; ch.style.opacity = '0'; setTimeout(() => ch.remove(), 550); }); } }
     if (pp.estiloGuias !== p.estiloGuias && GS[p.estiloGuias]) this.setSet({ guide: GS[p.estiloGuias] });
     if (s.cam === 'live' && s.settings.track !== false && !this.lm && !this._lmLoading && !this._lmFailed) this.initTrack();
     if (pp.orientacion !== p.orientacion) this.fit();

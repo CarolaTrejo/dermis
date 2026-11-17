@@ -16,16 +16,16 @@ const m = (k, t, z, s, l) => ({ k, t, z, s, l });
 const MK = [
   { name: 'Preparación', sub: 'Hidrata y prepara tu piel', cat: 'Preparación', tools: [], img: 'step1', applies: false, decor: 'prep', mo: 'circle',
     orient: 'Hidratá y prepará tu piel.', areas: ['Frente', 'Mejillas', 'Mentón'], vb: '470 50 560 344',
-    tt: 'Crema hidratante', tx: 'Aplicá una pequeña cantidad de crema sobre el rostro y distribuila suavemente con movimientos circulares. Masajeá hasta que se absorba y la piel quede hidratada, suave y uniforme.',
-    tip: 'Como tu piel tiende a resecarse, aplicá una capa fina de hidratante y dejá que se absorba antes de maquillarte. Así la piel quedará más suave y el maquillaje se verá más uniforme.',
+    tt: 'Crema hidratante', tx: 'Distribuí una capa fina de crema con movimientos circulares y masajeá hasta que se absorba.',
+    tip: 'Tu piel tiende a resecarse: dejá que la hidratante se absorba antes de maquillarte.',
     ph: ['Aplicá', 'Distribuí', 'Masajeá', 'Resultado'],
     sty: { stroke: '#FFFFFF', fill: '#FFFFFF', fo: .10, dot: '#FFFFFF', blend: 'screen' },
     zones: [{ e: [745, 100, 112, 34, 0] }, ...pair({ e: [596, 425, 48, 80, -22] }), { e: [745, 652, 56, 26, 0] }],
     m: [[m('add', 'Aplicá un poco más de crema en la frente.', 0, 'r')], [m('blend', 'Distribuí con movimientos circulares.', 1, 'l'), m('ok', 'Esta zona ya está lista.', 2, 'r')], [m('ok', 'Tu piel está hidratada y lista.', 2, 'r')]] },
   { name: 'Base', sub: 'Unifica el tono de tu piel', cat: 'Base', tools: [13, 14], img: 'step2', applies: true, decor: 'base', mo: 'out',
     orient: 'Aplicá la base en todo el rostro, desde el centro hacia afuera.', areas: ['Todo el rostro', 'Centro hacia afuera'], vb: '470 50 560 344',
-    tt: 'Base', tx: 'Colocá pequeñas cantidades de base en el centro del rostro y extendela hacia afuera con la brocha o la esponja húmeda. Construí la cobertura en capas finas hasta unificar el tono.',
-    tip: 'Como tu piel tiende a resecarse, elegí una base de acabado jugoso y aplicala sobre la hidratante ya absorbida. Evitá el exceso de polvo sobre las mejillas.',
+    tt: 'Base', tx: 'Colocá poca base en el centro del rostro y extendela hacia afuera con brocha o esponja húmeda. Sumá capas finas hasta unificar el tono.',
+    tip: 'Para piel seca, elegí una base de acabado jugoso y evitá el exceso de polvo en las mejillas.',
     ph: ['Aplicá', 'Extendé', 'Integrá', 'Resultado'],
     photos: [['Preparación', null, 0], ['Aplicación con brocha', N + 'base-2-brocha.png'], ['Distribución', null, 1], ['Acabado uniforme', N + 'base-4-acabado.png']],
     video: { src: V + 'video-a.mp4', title: 'Base en stick: aplicación, difuminado con brocha y acabado' },
@@ -34,8 +34,8 @@ const MK = [
     m: [[m('add', 'Falta base en el mentón.', 3, 'r')], [m('blend', 'Integrá un poco más este borde.', 1, 'l'), m('ok', 'Esta zona ya está lista.', 0, 'r')], [m('ok', 'El tono quedó unificado.', 2, 'r')]] },
   { name: 'Corrector', sub: 'Corrige e ilumina', cat: 'Corrector', tools: [14], img: 'step3', applies: true, mo: 'tap',
     orient: 'Aplicá el corrector a toques en la ojera y en las pequeñas zonas a corregir.', areas: ['Ojeras', 'Mentón'], vb: '540 220 410 254',
-    tt: 'Corrector', tx: 'Aplicá el corrector debajo del ojo, desde el lagrimal hacia afuera, y en las pequeñas zonas que quieras disimular. Difuminá a toques con la yema del dedo o la esponja, sin arrastrar.',
-    tip: 'La piel de la ojera es más fina y se reseca con facilidad. Hidratá la zona antes y usá una capa fina de corrector cremoso para que no marque líneas.',
+    tt: 'Corrector', tx: 'Aplicá el corrector a toques desde el lagrimal hacia afuera y difuminá suavemente, sin arrastrar.',
+    tip: 'La ojera se reseca fácil: hidratá antes y usá una capa fina de corrector cremoso.',
     ph: ['Aplicá', 'Difuminá', 'Integrá', 'Resultado'],
     photos: [['Aplicación', N + 'corrector-1-aplicacion.png'], ['Distribución', null, 1], ['Difuminado', N + 'corrector-3-difuminado.png'], ['Resultado', null, 3]],
     sty: { stroke: '#F7C46A', fill: '#F6D6A8', fo: .30, dot: '#F2D1A0' },
@@ -43,16 +43,16 @@ const MK = [
     m: [[m('add', 'Aplicá un poco más debajo de este ojo.', 1, 'r')], [m('blend', 'Difuminá a toques hacia afuera.', 0, 'l'), m('ok', 'Esta zona ya está lista.', 1, 'r')], [m('ok', 'No hace falta agregar más producto.', 1, 'r')]] },
   { name: 'Contorno', sub: 'Define tu rostro', cat: 'Contorno', tools: [13, 14], img: 'step4', applies: true, mo: 'dir', dir: [-0.8, -0.6],
     orient: 'Aplicá el contorno en las zonas marcadas para definir suavemente el rostro.', areas: ['Laterales de la frente', 'Debajo de los pómulos', 'Mandíbula'], vb: '470 250 520 322',
-    tt: 'Contorno', tx: 'Aplicá pequeñas cantidades de contorno debajo de los pómulos, en los laterales de la frente y sobre las zonas que quieras definir. Difuminá suavemente hasta lograr un acabado natural.',
-    tip: 'Como tu piel tiende a resecarse, elegí un contorno en crema y aplicalo en pequeñas cantidades. Así será más fácil de difuminar y el acabado se verá más suave y uniforme.',
+    tt: 'Contorno', tx: 'Aplicá poco contorno debajo de los pómulos, en los laterales de la frente y en la mandíbula. Difuminá hasta que se vea natural.',
+    tip: 'Para piel seca, usá contorno en crema: se difumina mejor y queda más uniforme.',
     ph: ['Aplicá', 'Difuminá', 'Integrá', 'Resultado'],
     sty: { stroke: '#FFFFFF', fill: '#9A5F3F', fo: .55, dot: '#8A5236', blend: 'multiply' },
     zones: [...pair({ e: [579, 108, 58, 16, -52] }), ...pair({ e: [566, 388, 70, 18, 42] }), ...pair({ e: [592, 612, 60, 14, 46] })],
     m: [[m('add', 'Aplicá un poco más en esta zona.', 2, 'l')], [m('blend', 'Difuminá suavemente hacia afuera.', 3, 'r'), m('ok', 'Esta zona ya está lista.', 0, 'l')], [m('ok', 'No hace falta agregar más producto.', 5, 'r')]] },
   { name: 'Rubor', sub: 'Aporta color al rostro', cat: 'Rubor', tools: [14], img: 'step5', applies: true, mo: 'dir', dir: [-0.86, -0.5],
     orient: 'Aplicá el rubor en la parte alta de las mejillas.', areas: ['Parte alta de las mejillas'], vb: '480 250 500 310',
-    tt: 'Rubor', tx: 'Sonreí suavemente y aplicá el rubor sobre la parte alta del pómulo, llevándolo en diagonal hacia la sien. Empezá con poco producto y sumá de a capas.',
-    tip: 'Un rubor líquido o en crema se funde mejor sobre la piel seca y aporta un acabado fresco. Aplicalo antes de cualquier polvo.',
+    tt: 'Rubor', tx: 'Sonreí y aplicá el rubor en la parte alta del pómulo, en diagonal hacia la sien. Empezá con poco y sumá capas.',
+    tip: 'En piel seca, un rubor en crema o líquido se funde mejor. Aplicalo antes del polvo.',
     ph: ['Aplicá', 'Difuminá', 'Integrá', 'Resultado'],
     photos: [['Antes', null, 0], ['Aplicación en crema', N + 'rubor-2-crema.png'], ['Difuminado con brocha', N + 'rubor-3-brocha.png'], ['Difuminado con dedos', N + 'rubor-4-dedos.png'], ['Resultado', N + 'rubor-5-resultado.png']],
     video: { src: V + 'video-c.mp4', title: 'Rubor en crema: stick, brocha y difuminado con dedos' },
@@ -61,16 +61,16 @@ const MK = [
     m: [[m('add', 'Aplicá un toque en la parte alta del pómulo.', 1, 'r')], [m('blend', 'Integrá un poco más este borde.', 0, 'l'), m('ok', 'Esta zona ya está lista.', 1, 'r')], [m('ok', 'El color quedó parejo en ambas mejillas.', 1, 'r')]] },
   { name: 'Iluminador', sub: 'Dale luz', cat: 'Iluminador', tools: [], img: 'step6', applies: true, mo: 'out',
     orient: 'Iluminá la parte alta de los pómulos y el puente de la nariz.', areas: ['Pómulos', 'Puente y punta de la nariz', 'Arco de cupido'], vb: '520 220 450 280',
-    tt: 'Iluminador', tx: 'Aplicá el iluminador donde la luz cae naturalmente: parte alta del pómulo, puente y punta de la nariz y arco de cupido. Difuminá los bordes con un pincel suave.',
-    tip: 'Elegí un iluminador satinado: en piel seca los brillos muy metalizados pueden marcar textura. Aplicalo con toques ligeros.',
+    tt: 'Iluminador', tx: 'Aplicá a toques en la parte alta del pómulo, el puente de la nariz y el arco de cupido. Difuminá los bordes.',
+    tip: 'Elegí un iluminador satinado: los metalizados marcan textura en piel seca.',
     ph: ['Aplicá', 'Difuminá', 'Integrá', 'Resultado'],
     sty: { stroke: '#FFF4D6', fill: '#FFF1CF', fo: .45, dot: '#FFF1CF', blend: 'screen' },
     zones: [...pair({ e: [574, 326, 46, 12, -24] }), { e: [745, 330, 8, 58, 0] }, { e: [745, 414, 10, 9, 0] }, { e: [745, 496, 13, 5, 0] }],
     m: [[m('add', 'Sumá un toque en el puente de la nariz.', 2, 'r')], [m('blend', 'Difuminá el borde del pómulo.', 0, 'l'), m('ok', 'Esta zona ya está lista.', 1, 'r')], [m('ok', 'El brillo quedó equilibrado.', 1, 'r')]] },
   { name: 'Ojos', sub: 'Sombras y definición', cat: 'Ojos', tools: [15], img: 'step7', applies: true, mo: 'dir', dir: [-1, -0.25],
     orient: 'Aplicá la sombra en el párpado móvil y difuminá hacia la cola del ojo.', areas: ['Párpado móvil', 'Cola del ojo'], vb: '530 170 430 266',
-    tt: 'Ojos', tx: 'Colocá la sombra lavanda en el párpado móvil y difuminá hacia el pliegue con movimientos de limpiaparabrisas. Intensificá la cola del ojo para alargar la mirada, como en tu referencia.',
-    tip: 'Prepará el párpado con un poco de corrector para que la sombra se adhiera mejor y no se acumule en los pliegues.',
+    tt: 'Ojos', tx: 'Colocá la sombra en el párpado móvil y difuminá hacia el pliegue. Intensificá la cola para alargar la mirada.',
+    tip: 'Prepará el párpado con un poco de corrector para que la sombra dure más.',
     ph: ['Aplicá', 'Difuminá', 'Intensificá', 'Resultado'],
     video: { src: V + 'video-b.mp4', title: 'Sombra ahumada: aplicación con pincel y difuminado hacia la cola' },
     sty: { stroke: '#E3D9FF', fill: '#A48BE8', fo: .5, dot: '#9C82E6', blend: 'multiply' },
@@ -78,8 +78,8 @@ const MK = [
     m: [[m('add', 'Aplicá más sombra en el pliegue.', 0, 'l')], [m('blend', 'Difuminá hacia la cola del ojo.', 1, 'r'), m('ok', 'Este párpado ya está listo.', 0, 'l')], [m('ok', 'Ambos ojos quedaron simétricos.', 1, 'r')]] },
   { name: 'Labios', sub: 'Finaliza tu look', cat: 'Labios', tools: [], img: 'step8', applies: true, mo: 'trace',
     orient: 'Delineá el contorno y completá la superficie de los labios.', areas: ['Contorno', 'Superficie'], vb: '600 450 290 180',
-    tt: 'Labios', tx: 'Delineá primero el contorno siguiendo tu forma natural y después completá el interior con el labial. Terminá con un toque de gloss en el centro del labio inferior.',
-    tip: 'Exfoliá e hidratá los labios antes de empezar. Así el color se desliza mejor y el acabado no marca pielcitas.',
+    tt: 'Labios', tx: 'Delineá tu contorno natural, completá con el labial y terminá con gloss en el centro del labio inferior.',
+    tip: 'Exfoliá e hidratá antes: el color se desliza mejor y no marca pielcitas.',
     ph: ['Delineá', 'Completá', 'Unificá', 'Resultado'],
     sty: { stroke: '#FFD6DD', fill: '#D9607A', fo: .42, dot: '#C8506A', blend: 'multiply' },
     zones: [{ d: UL, c: [745, 526], ax: 0, len: 70 }, { d: LL, c: [745, 572], ax: 0, len: 70 }],
@@ -132,8 +132,8 @@ const BR = [
   { name: 'Depilación', sub: 'Define la forma de tus cejas', img: 'tool1', applies: false, real: true, mo: 'tap',
     orient: 'Retirá los vellos que estén fuera de la forma de tus cejas para definir su contorno y lograr un acabado limpio y natural.', areas: ['Debajo del arco', 'Entrecejo', 'Extremos'], vb: '490 110 510 316',
     how: 'Cómo hacerlo', tipTitle: 'Tip', success: 'Depilación completada',
-    tt: 'Depilación', tx: 'Retirá suavemente los vellos que estén fuera de la forma de tus cejas con una pinza. Hacelo de a poco, siguiendo el crecimiento del vello, hasta conseguir un contorno limpio y natural.',
-    tip: 'Depilá un vello a la vez y revisá la forma de tus cejas mientras avanzás. Evitá retirar demasiados pelos de una misma zona para mantener su forma natural.',
+    tt: 'Depilación', tx: 'Retirá con pinza los vellos fuera de la forma, de a uno y en la dirección del crecimiento.',
+    tip: 'Revisá la forma mientras avanzás y no retires muchos vellos de una misma zona.',
     ph: ['Identificá los vellos', 'Depilá con pinza', 'Revisá la forma', 'Resultado'], tcat: 'Depilación',
     sty: { stroke: '#FFFFFF', fill: '#FFFFFF', fo: .9, dot: '#FFFFFF' },
     zones: [...pair(Object.assign({ keep: true }, BROW_OUT)), ...pair({ e: [612, 198, 32, 5, -2], rm: true }), { e: [745, 200, 16, 12, 0], rm: true }, ...pair({ e: [548, 176, 12, 5, -35], rm: true })],
@@ -141,8 +141,8 @@ const BR = [
   { name: 'Forma', sub: 'Marca la forma ideal', img: 'tool4', applies: false, decor: 'forma', mo: 'trace',
     orient: 'Marcá el inicio, el arco y el final de tus cejas según la forma objetivo.', areas: ['Inicio', 'Arco', 'Final'], vb: '490 110 510 316',
     how: 'Cómo hacerlo', tipTitle: 'Tip', success: '¡Listo! Forma definida.',
-    tt: 'Forma', tx: 'Con un lápiz, marcá tres puntos: el inicio alineado con la aleta de la nariz, el arco a la altura del iris y el final en la diagonal hacia el ojo. Uní los puntos con trazos suaves.',
-    tip: 'Usá un lápiz un tono más claro que tu vello para marcar la guía. Así podés corregir fácilmente antes de rellenar.',
+    tt: 'Forma', tx: 'Marcá tres puntos con lápiz: inicio, arco y final. Después unilos con trazos suaves.',
+    tip: 'Usá un lápiz un tono más claro que tu vello para poder corregir antes de rellenar.',
     ph: ['Marcá el inicio', 'Ubicá el arco', 'Definí el final', 'Resultado'], tcat: 'Relleno',
     sty: { stroke: '#FFFFFF', fill: '#FFFFFF', fo: 0, dot: '#FFFFFF' },
     zones: pair(BROW_OUT),
@@ -150,8 +150,8 @@ const BR = [
   { name: 'Relleno', sub: 'Unifica y da volumen', img: 'prod10', applies: true, mo: 'dir', dir: [-1, 0.15],
     orient: 'Completá los espacios dentro de la forma para dar volumen.', areas: ['Cola', 'Inicio'], vb: '490 110 510 316',
     how: 'Cómo hacerlo', tipTitle: 'Tip', success: '¡Listo! Relleno completo.',
-    tt: 'Relleno', tx: 'Rellená con trazos cortos que imiten el vello, siguiendo su dirección. Concentrá el producto en la cola y dejá el inicio más suave.',
-    tip: 'Peiná el vello antes de rellenar para ver dónde hay huecos reales. Trabajá con poco producto y sumá de a poco.',
+    tt: 'Relleno', tx: 'Rellená con trazos cortos en la dirección del vello. Intensificá la cola y suavizá el inicio.',
+    tip: 'Peiná el vello antes para ver los huecos reales. Usá poco producto.',
     ph: ['Peiná', 'Trazá', 'Difuminá', 'Resultado'], tcat: 'Relleno',
     sty: { stroke: '#FFFFFF', fill: '#4A2E22', fo: .45, dot: '#4A2E22', blend: 'multiply' },
     zones: [...pair(Object.assign({ keep: true }, BROW_OUT)), ...pair({ e: [555, 186, 26, 7, -25] }), ...pair({ e: [688, 198, 14, 9, 15] })],
@@ -159,8 +159,8 @@ const BR = [
   { name: 'Fijación', sub: 'Mantiene la forma', img: 'tool5', applies: false, decor: 'fij', mo: 'dir', dir: [0.25, -1],
     orient: 'Peiná y fijá el vello hacia arriba para mantener la forma.', areas: ['Todo el largo de la ceja'], vb: '490 110 510 316',
     how: 'Cómo hacerlo', tipTitle: 'Tip', success: '¡Listo! Tus cejas están fijadas.',
-    tt: 'Fijación', tx: 'Pasá el gel fijador desde el inicio hacia la cola, peinando el vello hacia arriba y después hacia afuera. Dejá secar unos segundos sin tocar.',
-    tip: 'Retirá el exceso de producto del cepillo antes de aplicar para que el gel no deje restos blancos.',
+    tt: 'Fijación', tx: 'Peiná con gel desde el inicio hacia la cola, primero hacia arriba y luego hacia afuera. Dejá secar.',
+    tip: 'Retirá el exceso del cepillo para que no queden restos blancos.',
     ph: ['Peiná hacia arriba', 'Fijá', 'Definí la cola', 'Resultado'], tcat: 'Fijación',
     sty: { stroke: '#FFFFFF', fill: '#FFFFFF', fo: .06, dot: '#FFFFFF' },
     zones: pair({ e: [614, 180, 88, 18, -4] }),
@@ -444,6 +444,9 @@ function browTarget(P,s,style,fw){
   return {poly:up.concat(lo.reverse()),pts:{start,arch,tail:tailP,nw,iris,ei:P(S.ei),eo:P(S.eo)}};
 }
 
+const crv=(pts,closed,per=5)=>{const n=pts.length;if(n<3)return pts;const g=i=>closed?pts[(i+n)%n]:pts[Math.max(0,Math.min(n-1,i))],o=[];const segs=closed?n:n-1;for(let i=0;i<segs;i++){const p0=g(i-1),p1=g(i),p2=g(i+1),p3=g(i+2);for(let k=0;k<per;k++){const t=k/per,t2=t*t,t3=t2*t;o.push([0,1].map(j=>0.5*((2*p1[j])+(-p0[j]+p2[j])*t+(2*p0[j]-5*p1[j]+4*p2[j]-p3[j])*t2+(-p0[j]+3*p1[j]-3*p2[j]+p3[j])*t3)))}}if(!closed)o.push(pts[n-1]);return o};
+const leaf=(pts,w)=>{const c=crv(pts,false,6),n=c.length,L=[],R=[];for(let i=0;i<n;i++){const p=c[Math.max(0,i-1)],q=c[Math.min(n-1,i+1)];let dx=q[0]-p[0],dy=q[1]-p[1];const l=Math.hypot(dx,dy)||1;const t=i/(n-1),ww=w*Math.pow(Math.sin(Math.PI*t),0.8)/2;L.push([c[i][0]-dy/l*ww,c[i][1]+dx/l*ww]);R.push([c[i][0]+dy/l*ww,c[i][1]-dx/l*ww])}return L.concat(R.reverse())};
+const toward=(pts,c,k)=>pts.map(p=>lerp(p,c,k));
 function buildZones(key,P,o={}){
   const fw=dist(P(234),P(454)), fh=dist(P(10),P(152)), z=[];
   const oval=OVAL.map(P), nose=P(4);
@@ -457,10 +460,13 @@ function buildZones(key,P,o={}){
   for(const s of ['R','L']){
     const S=SD[s];
     if(key==='concealer'){const lo=S.lo.map(P).map(q=>[q[0],q[1]+fh*0.025]);const apex=lerp(P(S.ll),P(S.ch),0.9);z.push({id:'conc'+s,pair:'conc',side:s,name:'debajo del ojo '+S.w.m,poly:lo.concat([apex]),dots:[lerp(P(S.ll),apex,0.35),lerp(P(S.ei),apex,0.45),lerp(P(S.eo),apex,0.3)],flow:[]})}
-    if(key==='contour'){const a=lerp(P(S.ear),P(S.ear2),0.4),b=lerp(a,P(S.mc),0.5);z.push({id:'cont'+s,pair:'cont',side:s,name:'el contorno '+S.w.m,poly:band(a,b,fw*0.075,fw*0.04),flow:[[a,b],[lerp(a,b,0.5),[lerp(a,b,0.5)[0],lerp(a,b,0.5)[1]-fh*0.07]]]})}
-    if(key==='blush'){const c0=lerp(P(S.ch),P(S.cb),0.5),t=P(S.tmp);let k=0.22,tt=t;if(o.shape==='Redondo'){k=0.3}if(o.shape==='Alargado'){tt=[t[0],c0[1]+(t[1]-c0[1])*0.45]}const an=ang(c0,tt),c=lerp(c0,tt,k);z.push({id:'blush'+s,pair:'blush',side:s,name:'el pómulo '+S.w.m,poly:ell(c,fw*0.115,fw*0.052,an),flow:[[c0,lerp(c0,t,0.6)]]})}
+    if(key==='contour'){const a=lerp(P(S.ear),P(S.ear2),0.4),b=lerp(a,P(S.mc),0.5);z.push({id:'cont'+s,pair:'cont',side:s,name:'el contorno '+S.w.m,poly:band(a,b,fw*0.075,fw*0.04),flow:[[a,b],[lerp(a,b,0.5),[lerp(a,b,0.5)[0],lerp(a,b,0.5)[1]-fh*0.07]]]});
+      const mid=P(9),fr=(s==='R'?[109,67,103]:[338,297,332]).map(P).map(q=>lerp(q,mid,0.16));z.push({id:'ctF'+s,measure:false,side:s,poly:leaf(fr,fw*0.05)});
+      const tp=(s==='R'?[54,21,162]:[284,251,389]).map(P).map(q=>lerp(q,nose,0.07));z.push({id:'ctT'+s,measure:false,side:s,poly:leaf(tp,fw*0.042)});
+      const jw=(s==='R'?[172,136,150,149]:[397,365,379,378]).map(P).map(q=>lerp(q,nose,0.06));z.push({id:'ctJ'+s,measure:false,side:s,poly:leaf(jw,fw*0.04)})}
+    if(key==='blush'){const c0=lerp(P(S.ch),P(S.cb),0.5),t=P(S.tmp);let k=0.22,tt=t;if(o.shape==='Redondo'){k=0.3}if(o.shape==='Alargado'){tt=[t[0],c0[1]+(t[1]-c0[1])*0.45]}const an=ang(c0,tt),c=lerp(c0,tt,k);z.push({id:'blush'+s,pair:'blush',side:s,name:'el pómulo '+S.w.m,poly:ell(c,fw*0.105,fw*0.058,an),soft:true,flow:[[c0,lerp(c0,t,0.6)]]})}
     if(key==='highlight'){const c=lerp(P(S.cb),P(S.tmp),0.45);const cc=[c[0],c[1]-fh*0.03];z.push({id:'hl'+s,pair:'hl',side:s,name:'el pómulo '+S.w.m,metric:'L',poly:ell(cc,fw*0.07,fw*0.022,ang(P(S.cb),P(S.tmp))),flow:[[lerp(cc,P(S.cb),0.4),lerp(cc,P(S.tmp),0.4)]]});z.push({id:'hlb'+s,measure:false,poly:ell(lerp(P(S.bl[1]),P(S.eo),0.4),fw*0.03,fw*0.012,0),flow:[]})}
-    if(key==='eyes'){const up=S.up.map(P),bl=S.bl.map(P),idx=[0,2,4,6,8];const top=bl.map((b,i)=>lerp(up[idx[i]],b,0.55));z.push({id:'eye'+s,pair:'eye',side:s,name:'el párpado '+S.w.m,poly:up.concat(top.slice().reverse()),flow:[[top[0],top[4]]]})}
+    if(key==='eyes'){const up=S.up.map(P),bl=S.bl.map(P),idx=[0,2,4,6,8];const top=bl.map((b,i)=>lerp(up[idx[i]],b,0.62));z.push({id:'eye'+s,pair:'eye',side:s,name:'el párpado '+S.w.m,poly:up.concat(top.slice().reverse()),flow:[[top[0],top[4]]]})}
     if(key==='lips'){const pts=(s==='R'?LIP_R:LIP_L).map(P);z.push({id:'lip'+s,pair:'lip',side:s,hidden:true,name:'el lado '+S.w.m+' del labio',poly:scl(pts,cen(pts),0.85)})}
     if(key.startsWith('brow')){
       const bp=S.bu.map(P).concat(S.bl.map(P).reverse());const tg=browTarget(P,s,o.browStyle||{lift:0.25,thick:1},fw);
@@ -477,53 +483,182 @@ function buildZones(key,P,o={}){
   const ZOOM = { 'Corrector': { p: [230, 450, .5], z: 1.6 }, 'Ojos': { p: [159, 386, .5], z: 1.75 }, 'Labios': { p: [13, 14, .5], z: 2 }, 'Depilación': { p: [105, 334, .5], z: 1.65 }, 'Forma': { p: [105, 334, .5], z: 1.5 }, 'Relleno': { p: [105, 334, .5], z: 1.65 }, 'Fijación': { p: [105, 334, .5], z: 1.65 },
     'Rubor': { p: [50, 280, .5], z: 1.35, auto: false }, 'Contorno': { p: [4, 152, .25], z: 1.25, auto: false }, 'Iluminador': { p: [117, 346, .5], z: 1.35, auto: false } };
   const res = (sp, P) => { if (typeof sp === 'number') return P(sp); const p = res(sp[0], P), q = res(sp[1], P), t = sp[2]; return [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]; };
-  const K = 1.0, LW = 1.5; // guías un poco más grandes y con trazo más visible que la referencia
   const ALL = Array.from({ length: 478 }, (_, i) => i);
-  function build(host, name, W, H) {
-    host.innerHTML = '';
+  // paletas por producto: [r,g,b], opacidad máxima, desenfoque relativo al ancho del rostro, modo de mezcla
+  const LOOKTINT = { 'Lavanda glow': { eye: [176, 150, 214], lip: [214, 128, 150] }, 'Dorado cálido': { eye: [196, 150, 92], lip: [196, 110, 96] }, 'Glam clásico': { eye: [128, 92, 86], lip: [176, 70, 82] }, 'Rosado fresco': { eye: [222, 150, 160], lip: [228, 120, 140] } };
+  const TEX = {
+    prep: { c: [255, 246, 238], a: 0.4, b: 0.03, m: 'screen' },
+    base: { c: [228, 184, 150], a: 0.66, b: 0.04, m: 'source-over' },
+    concealer: { c: [240, 210, 172], a: 0.82, b: 0.022, m: 'source-over', satin: 0.25 },
+    contour: { c: [146, 98, 72], a: 0.7, b: 0.022, m: 'multiply' },
+    blush: { c: [226, 122, 130], a: 0.74, b: 0.03, m: 'multiply', satin: 0.18 },
+    highlight: { c: [255, 246, 236], a: 0.68, b: 0.022, m: 'screen', pearl: true },
+    eyes: { c: [172, 140, 214], a: 0.72, b: 0.016, m: 'multiply', satin: 0.2 },
+    lips: { c: [206, 108, 136], a: 0.85, b: 0.008, m: 'multiply', edge: true },
+    brow: { c: [98, 72, 58], a: 0.6, b: 0.006, m: 'source-over' },
+  };
+  let NOISE = null, STRK = null;
+  function streaks() { if (STRK) return STRK; const s = document.createElement('canvas'); s.width = 220; s.height = 90; const g = s.getContext('2d'); g.filter = 'blur(0.8px)';
+    for (let i = 0; i < 70; i++) { const y = Math.random() * 90, x = Math.random() * 220, l = 30 + Math.random() * 120; g.strokeStyle = 'rgba(0,0,0,' + (0.25 + Math.random() * 0.6) + ')'; g.lineWidth = 0.6 + Math.random() * 1.6; g.beginPath(); g.moveTo(x, y); g.quadraticCurveTo(x + l / 2, y + (Math.random() - 0.5) * 4, x + l, y + (Math.random() - 0.5) * 3); g.stroke(); g.beginPath(); g.moveTo(x - 220, y); g.lineTo(x - 220 + l, y); g.stroke(); }
+    return (STRK = s); }
+  function noise() { if (NOISE) return NOISE; const n = document.createElement('canvas'); n.width = n.height = 160; const g = n.getContext('2d'), im = g.createImageData(160, 160);
+    for (let i = 0; i < im.data.length; i += 4) { const v = Math.random(); im.data[i] = im.data[i + 1] = im.data[i + 2] = 0; im.data[i + 3] = Math.pow(v, 2.2) * 255; }
+    g.putImageData(im, 0, 0); const s = document.createElement('canvas'); s.width = s.height = 160; const sg = s.getContext('2d'); sg.filter = 'blur(1.2px)'; sg.drawImage(n, 0, 0); return (NOISE = sg.filter === 'blur(1.2px)' ? s : n); }
+
+  /* ---------- pinceladas: guías como maquillaje real (sellos gaussianos a lo largo de líneas anatómicas) ---------- */
+  const BRUSH = {
+    prep: { c: [255, 248, 240], a: 0.34, m: 'screen' },
+    base: { c: [222, 176, 142], a: 0.3, m: 'soft-light' },
+    concealer: { c: [246, 224, 190], a: 0.5, m: 'screen' },
+    contour: { c: [120, 82, 62], a: 0.42, m: 'multiply' },
+    blush: { c: [222, 116, 124], a: 0.4, m: 'multiply' },
+    highlight: { c: [255, 248, 238], a: 0.55, m: 'screen' },
+    eyes: { c: [172, 140, 214], a: 0.5, m: 'multiply' },
+    lips: { c: [200, 104, 128], a: 0.5, m: 'multiply' },
+  };
+  function strokes(key, P) {
+    const fw = dist(P(234), P(454)), fh = dist(P(10), P(152)), S = [], nose = P(4), fhd = P(151), mid = P(9), chin = lerp(P(152), P(17), 0.45);
+    const dn = (q, k) => [q[0], q[1] + fh * k];
+    const add = (pts, r, side) => S.push({ pts, r: r.map(v => v * fw), side });
+    if (key === 'prep' || key === 'base') { const k = key === 'base' ? 1.25 : 1;
+      add([lerp(P(105), fhd, 0.5), lerp(fhd, mid, 0.2), lerp(P(334), fhd, 0.5)], [0.05 * k, 0.06 * k, 0.05 * k]); add([lerp(chin, P(176), 0.3), chin, lerp(chin, P(400), 0.3)], [0.04 * k, 0.045 * k, 0.04 * k]);
+      if (key === 'base') add([P(168), P(197), P(4)], [0.03, 0.035, 0.03]);
+      for (const s of ['R', 'L']) { const D = SD[s]; add([lerp(P(D.nw), P(D.ch), 0.4), P(D.ch), lerp(P(D.ch), P(D.ear), 0.45)], [0.05 * k, 0.065 * k, 0.05 * k], s); } }
+    for (const s of ['R', 'L']) { const D = SD[s];
+      if (key === 'concealer') { const lo = D.lo.slice(2, 8).map(P).map(q => dn(q, 0.035)); add(lo, [0.024, 0.032, 0.036, 0.034, 0.03, 0.022], s); add([lo[3], dn(lerp(P(D.ll), P(D.ch), 0.55), 0.01)], [0.03, 0.016], s); }
+      if (key === 'contour') { const a = lerp(P(D.ear), P(D.tmp), 0.25), b = lerp(lerp(P(D.ear), P(D.mc), 0.45), P(D.ch), 0.18);
+        add([a, lerp(a, b, 0.5), b], [0.04, 0.034, 0.016], s);
+        add([lerp(P(D.ear2), P(D.ear), 0.15), lerp(P(D.ear2), chin, 0.35)], [0.026, 0.014], s);
+        add([lerp(P(D.tmp), P(s === 'R' ? 54 : 284), 0.6), lerp(P(D.tmp), P(s === 'R' ? 54 : 284), 0.1)], [0.024, 0.03], s); }
+      if (key === 'blush') { const c0 = lerp(lerp(P(D.ch), P(D.cb), 0.45), P(D.nw), 0.08), t = lerp(P(D.tmp), P(D.eo), 0.15);
+        add([c0, lerp(c0, t, 0.45), lerp(c0, t, 0.8)], [0.058, 0.052, 0.032], s); }
+      if (key === 'highlight') { const a = lerp(P(D.cb), P(D.eo), 0.42), b = lerp(P(D.tmp), P(D.eo), 0.3);
+        add([a, lerp(a, b, 0.5), b], [0.016, 0.02, 0.014], s);
+        add(D.bu.slice(2).map(P).map(q => dn(q, -0.02)), [0.01, 0.013, 0.01], s); }
+      if (key === 'eyes') { const up = D.up.map(P), br = D.bu.map(P), n = up.length;
+        const lid = up.map((q, i) => lerp(q, br[Math.min(br.length - 1, Math.round((n - 1 - i) / (n - 1) * (br.length - 1)))] || br[0], 0.3));
+        const pts = lid.slice().reverse(); pts.push(lerp(pts[pts.length - 1], P(D.tmp), 0.18));
+        add(pts, pts.map((_, i) => 0.016 + 0.018 * (i / (pts.length - 1))), s); }
+    }
+    if (key === 'highlight') { add([P(168), P(6), P(197)], [0.009, 0.011, 0.008]); add([lerp(P(0), P(164), 0.5)], [0.012]); }
+    if (key === 'lips') { const L = LIPS.map(P); L.push(L[0]); add(L, L.map(() => 0.011)); }
+    return S;
+  }
+  function stamp(g, x, y, r, rgb) { const gr = g.createRadialGradient(x, y, 0, x, y, r); const c = rgb.join(','); gr.addColorStop(0, 'rgba(' + c + ',.55)'); gr.addColorStop(0.45, 'rgba(' + c + ',.32)'); gr.addColorStop(1, 'rgba(' + c + ',0)'); g.fillStyle = gr; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); }
+  function build(host, name, W, H, opt) {
+    [...host.children].forEach(ch => { ch.style.transition = 'opacity .55s ease'; ch.style.opacity = '0'; setTimeout(() => ch.remove(), 600); });
     const key = KEY[name]; if (!key) return null;
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const cv = document.createElement('canvas'), d = window.devicePixelRatio || 1;
     cv.width = Math.round(W * d); cv.height = Math.round(H * d); cv.style.cssText = 'position:absolute;left:0;top:0;width:' + W + 'px;height:' + H + 'px';
     host.appendChild(cv);
+    const lay = document.createElement('canvas'); lay.width = cv.width; lay.height = cv.height; const lc = lay.getContext('2d');
     const c = cv.getContext('2d'); let t0 = null; const FS = {};
-    const ELL = /^(blush|hl|cont|base)/;
+    const tk = key.startsWith('brow') ? 'brow' : key, base = TEX[tk], tint = LOOKTINT[(opt && opt.look) || ''] || {};
+    const T = Object.assign({}, base, tk === 'eyes' && tint.eye ? { c: tint.eye } : {}, tk === 'lips' && tint.lip ? { c: tint.lip } : {});
+    const pat = c.createPattern(noise(), 'repeat'), spat = c.createPattern(streaks(), 'repeat');
+    const BR = BRUSH[tk] ? Object.assign({}, BRUSH[tk], tk === 'eyes' && tint.eye ? { c: tint.eye } : {}, tk === 'lips' && tint.lip ? { c: tint.lip } : {}) : null;
+    cv.style.mixBlendMode = 'normal'; cv.dataset.blend = 'source-over';
+    function paint(P, el, fac) {
+      const S = strokes(key, P), IN = 1.3, STG = 0.18, HOLD = 2, FADE = 1.2, LOW = 0.9;
+      lc.setTransform(1, 0, 0, 1, 0, 0); lc.globalCompositeOperation = 'source-over'; lc.clearRect(0, 0, lay.width, lay.height); lc.setTransform(d, 0, 0, d, 0, 0);
+      let last = 0;
+      S.forEach((st, si) => {
+        const f = st.side ? fac[st.side] : 1, va = st.side ? (f < 0.55 ? Math.max(0, (f - 0.3) / 0.25) : 1) : 1; if (va <= 0.01) return;
+        const d0 = si * STG, pr = reduce ? 1 : Math.max(0, Math.min(1, (el - d0) / IN)); last = Math.max(last, d0 + IN); if (pr <= 0) return;
+        const pts = st.pts.length > 2 ? crv(st.pts, false, 6) : st.pts, rr = st.pts.length > 2 ? pts.map((_, i) => { const u = i / (pts.length - 1) * (st.r.length - 1), k = Math.floor(u), w = u - k; return st.r[k] * (1 - w) + (st.r[Math.min(k + 1, st.r.length - 1)]) * w; }) : st.r;
+        const sx = Math.sqrt(Math.min(1.05, f));
+        let L = 0; const seg = [0]; for (let i = 1; i < pts.length; i++) { L += dist(pts[i - 1], pts[i]); seg.push(L); }
+        const end = L * ease(pr); lc.globalAlpha = va;
+        if (pts.length === 1) { stamp(lc, pts[0][0], pts[0][1], rr[0] * ease(pr), BR.c); return; }
+        for (let i = 1; i < pts.length; i++) { const a = pts[i - 1], b = pts[i], l = seg[i] - seg[i - 1]; if (seg[i - 1] > end) break;
+          const r0 = rr[i - 1] * sx, r1 = rr[i] * sx, stp = Math.max(1, Math.min(r0, r1) * 0.3);
+          for (let u = 0; u <= l; u += stp) { if (seg[i - 1] + u > end) break; const k = l ? u / l : 0; stamp(lc, a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, r0 + (r1 - r0) * k, BR.c); } }
+      });
+      lc.globalAlpha = 1;
+      lc.globalCompositeOperation = 'destination-out'; lc.globalAlpha = 0.22; lc.fillStyle = pat; lc.fillRect(0, 0, W, H); lc.globalAlpha = 1; lc.globalCompositeOperation = 'source-over';
+      const hi = el < last + HOLD ? 1 : Math.max(0, 1 - (el - last - HOLD) / FADE), lvl = LOW + (1 - LOW) * hi;
+      c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = Math.min(1, BR.a * 2) * lvl; c.drawImage(lay, 0, 0); c.globalAlpha = 1;
+    }
     function persp(z, poly, P, fac) {
       const sd = z.side || ((z.id || '').match(/[RL]$/) || [])[0]; if (!sd) return { poly, a: 1 };
       const f = fac[sd], a = f < 0.55 ? Math.max(0, (f - 0.3) / 0.25) : 1;
-      if (!ELL.test(z.id || '')) return { poly, a };
+      if (/^(eye|lip|brow|conc)/.test(z.id || '')) return { poly, a };
       const A = P(234), B = P(454); let ux = B[0] - A[0], uy = B[1] - A[1]; const l = Math.hypot(ux, uy) || 1; ux /= l; uy /= l;
       const cc = cen(poly), k = Math.min(1.08, f);
       return { a, poly: poly.map(q => { const dx = q[0] - cc[0], dy = q[1] - cc[1], pr = dx * ux + dy * uy, d2 = pr * (k - 1); return [q[0] + ux * d2, q[1] + uy * d2]; }) };
     }
-    function drawBrow(z, a, t, el) {
-      const s = key, b = z.brow, P = b.pts;
-      if (s === 'brow-pluck') { c.beginPath(); z.natural.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); c.fillStyle = `rgba(232,185,138,${0.22 * a})`; c.fill(); }
-      c.beginPath(); b.poly.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath();
-      if (s === 'brow-fill' || s === 'brow-set') { c.fillStyle = `rgba(201,181,245,${0.22 * a})`; c.fill(); }
-      c.setLineDash([3 * LW, 4 * LW]); c.lineDashOffset = -t / 60; c.strokeStyle = `rgba(236,226,255,${0.9 * a})`; c.lineWidth = 1.3 * LW; c.stroke(); c.setLineDash([]);
-      if (s === 'brow-shape') { [[P.nw, P.start], [P.nw, P.arch], [P.nw, P.tail]].forEach(([p0, p1], i) => { const k = ease((el - 0.3 * i) / 0.9); if (k <= 0) return; const e = lerp(p0, p1, k * 1.08); c.strokeStyle = `rgba(240,232,255,${0.7 * a})`; c.lineWidth = 1 * LW; c.beginPath(); c.moveTo(p0[0], p0[1]); c.lineTo(e[0], e[1]); c.stroke(); if (k >= 1) { c.fillStyle = `rgba(255,250,255,${a})`; c.beginPath(); c.arc(p1[0], p1[1], 3.2 * K, 0, 7); c.fill(); c.strokeStyle = `rgba(255,250,255,${0.5 * a})`; c.beginPath(); c.arc(p1[0], p1[1], (7 + 2 * Math.sin(t / 300)) * K, 0, 7); c.stroke(); } }); }
-      if (s === 'brow-fill') { for (let i = 0; i < 9; i++) { const u = i / 8, p = lerp(P.start, P.tail, u), ph = ((t / 1300) + i * 0.11) % 1, len = (8 + 6 * (1 - u)) * K; const an = -Math.PI / 2 + u * 1.2 * (z.side === 'R' ? 1 : -1) * -1; const q = [p[0] + Math.cos(an) * len * ease(ph), p[1] + Math.sin(an) * len * ease(ph)]; c.strokeStyle = `rgba(255,250,255,${Math.sin(Math.PI * ph) * 0.8 * a})`; c.lineWidth = 1.4 * LW; c.beginPath(); c.moveTo(p[0], p[1]); c.lineTo(q[0], q[1]); c.stroke(); } }
-      (z.flow || []).forEach(([p0, p1], fi) => { const s2 = ((t / 1400) + fi * 0.3) % 1, p = lerp(p0, p1, ease(s2)); c.fillStyle = `rgba(255,250,255,${Math.sin(Math.PI * s2) * a})`; c.beginPath(); c.arc(p[0], p[1], 2.6 * K, 0, 7); c.fill(); });
+    const OFF = 30000;
+    function blob(poly, rgb, alpha, blurPx, core) {
+      // pigmento: más concentrado en el centro, bordes difuminados (sombra desenfocada desplazada)
+      let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9; poly.forEach(p => { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]); });
+      const cc = core || cen(poly), r = Math.max(x1 - x0, y1 - y0) / 2;
+      const g = lc.createRadialGradient(cc[0] - OFF, cc[1], 0, cc[0] - OFF, cc[1], r * 1.05);
+      g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(0.55, 'rgba(0,0,0,.78)'); g.addColorStop(1, 'rgba(0,0,0,.42)');
+      lc.save(); lc.setTransform(d, 0, 0, d, 0, 0); lc.shadowColor = 'rgba(' + rgb.join(',') + ',' + alpha + ')'; lc.shadowBlur = blurPx * d; lc.shadowOffsetX = OFF * d;
+      lc.beginPath(); poly.forEach((p, i) => i ? lc.lineTo(p[0] - OFF, p[1]) : lc.moveTo(p[0] - OFF, p[1])); lc.closePath(); lc.fillStyle = g; lc.fill(); lc.restore();
+      return [x0 - blurPx * 2, y0 - blurPx * 2, x1 + blurPx * 2, y1 + blurPx * 2];
+    }
+    function drawBrow(z,a,t,el){
+    const s=key,b=z.brow,P=b.pts;
+    if(s==='brow-pluck'){c.beginPath();z.natural.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));c.closePath();c.fillStyle=`rgba(232,185,138,${0.22*a})`;c.fill()}
+    c.beginPath();b.poly.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));c.closePath();
+    if(s==='brow-fill'||s==='brow-set'){c.fillStyle=`rgba(201,181,245,${0.22*a})`;c.fill()}
+    c.setLineDash([3,4]);c.lineDashOffset=-t/60;c.strokeStyle=`rgba(236,226,255,${0.9*a})`;c.lineWidth=1.3;c.stroke();c.setLineDash([]);
+    if(s==='brow-shape'){const lines=[[P.nw,P.start],[P.nw,P.arch],[P.nw,P.tail]];lines.forEach(([p0,p1],i)=>{const k=ease((el-0.3*i)/0.9);if(k<=0)return;const e=lerp(p0,p1,k*1.08);c.strokeStyle=`rgba(240,232,255,${0.7*a})`;c.lineWidth=1;c.beginPath();c.moveTo(p0[0],p0[1]);c.lineTo(e[0],e[1]);c.stroke();if(k>=1){c.fillStyle=`rgba(255,250,255,${a})`;c.beginPath();c.arc(p1[0],p1[1],3.2,0,7);c.fill();c.strokeStyle=`rgba(255,250,255,${0.5*a})`;c.beginPath();c.arc(p1[0],p1[1],7+2*Math.sin(t/300),0,7);c.stroke()}})}
+    if(s==='brow-fill'){for(let i=0;i<9;i++){const u=i/8,p=lerp(P.start,P.tail,u),ph=((t/1300)+i*0.11)%1,len=8+6*(1-u);const an=-Math.PI/2+u*1.2*(z.side==='R'?1:-1)*-1;const q=[p[0]+Math.cos(an)*len*ease(ph),p[1]+Math.sin(an)*len*ease(ph)];c.strokeStyle=`rgba(255,250,255,${Math.sin(Math.PI*ph)*0.8*a})`;c.lineWidth=1.4;c.beginPath();c.moveTo(p[0],p[1]);c.lineTo(q[0],q[1]);c.stroke()}}
+    (z.flow||[]).forEach(([p0,p1],fi)=>{const s2=((t/1400)+fi*0.3)%1,p=lerp(p0,p1,ease(s2));c.fillStyle=`rgba(255,250,255,${Math.sin(Math.PI*s2)*a})`;c.beginPath();c.arc(p[0],p[1],2.6,0,7);c.fill()});
+  }
+    function drawBrowMarks(z, a, el) {
+      const P = z.brow.pts;
+      if (key === 'brow-shape') [[P.nw, P.start], [P.nw, P.arch], [P.nw, P.tail]].forEach(([p0, p1], i) => { const k = ease((el - 0.3 * i) / 0.9); if (k <= 0) return; const e = lerp(p0, p1, k); c.strokeStyle = 'rgba(255,248,242,' + (0.55 * a) + ')'; c.lineWidth = 1; c.setLineDash([2, 4]); c.beginPath(); c.moveTo(p0[0], p0[1]); c.lineTo(e[0], e[1]); c.stroke(); c.setLineDash([]); if (k >= 1) { c.fillStyle = 'rgba(255,248,242,' + (0.85 * a) + ')'; c.beginPath(); c.arc(p1[0], p1[1], 2.4, 0, 7); c.fill(); } });
+    }
+    function outline(poly, a, dashed, thin) {
+      if (a <= 0.01) return; c.save(); c.setTransform(d, 0, 0, d, 0, 0); c.lineJoin = 'round'; c.lineCap = 'round';
+      c.beginPath(); poly.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath();
+      c.setLineDash(dashed ? [2.6, 3.6] : []); c.shadowColor = 'rgba(30,18,50,.28)'; c.shadowBlur = 2.5;
+      c.strokeStyle = 'rgba(255,253,250,' + (0.95 * a) + ')'; c.lineWidth = thin ? 1.1 : 1.6; c.stroke(); c.restore(); }
+    function wob(poly, id, amp) { let h = 0; for (const ch of id) h = (h * 31 + ch.charCodeAt(0)) % 997; const cc = cen(poly), n = poly.length;
+      return poly.map((p, i) => { const u = i / n * Math.PI * 2, k = 1 + amp * (0.6 * Math.sin(u * 3 + h) + 0.4 * Math.sin(u * 7 + h * 1.7)); return [cc[0] + (p[0] - cc[0]) * k, cc[1] + (p[1] - cc[1]) * k]; }); }
+    function lines(z, poly, pp, a, t, fac, P) {
+      if (a <= 0.01) return;
+      c.save(); c.setTransform(d, 0, 0, d, 0, 0); c.lineJoin = 'round'; c.lineCap = 'round';
+      if (!z.noLine && !z.brow) { c.beginPath(); poly.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath();
+        c.setLineDash(z.dash || z.ring ? [3, 4.4] : []); c.lineDashOffset = -t / 70; c.shadowColor = 'rgba(40,24,70,.35)'; c.shadowBlur = 3;
+        c.strokeStyle = 'rgba(255,252,250,' + (0.85 * a) + ')'; c.lineWidth = z.thin ? 0.95 : 1.3; c.stroke(); c.setLineDash([]); }
+      if (z.dotsLine) { const dl = persp({ id: z.id, side: z.side }, z.dotsLine, P, fac).poly; c.shadowColor = 'rgba(255,250,245,.9)'; c.shadowBlur = 6; dl.forEach(p => { c.fillStyle = 'rgba(255,253,250,' + (0.92 * a) + ')'; c.beginPath(); c.arc(p[0], p[1], 1.9, 0, 7); c.fill(); }); }
+      c.shadowBlur = 0;
+      (z.flow || []).forEach(([p0, p1], fi) => { const s = ((t / 2200) + fi * 0.27) % 1, e = ease(s), p = lerp(p0, p1, e), q = lerp(p0, p1, Math.max(0, e - 0.08)), al = Math.sin(Math.PI * s) * a * 0.85;
+        const an = Math.atan2(p[1] - q[1], p[0] - q[0]), L = 7; c.strokeStyle = 'rgba(255,252,250,' + al + ')'; c.lineWidth = 1.5;
+        c.beginPath(); c.moveTo(p[0] - Math.cos(an - 0.6) * L, p[1] - Math.sin(an - 0.6) * L); c.lineTo(p[0], p[1]); c.lineTo(p[0] - Math.cos(an + 0.6) * L, p[1] - Math.sin(an + 0.6) * L); c.stroke();
+        const p2 = lerp(p0, p1, Math.max(0, e - 0.13)); c.globalAlpha = 0.5; c.beginPath(); c.moveTo(p2[0] - Math.cos(an - 0.6) * L * 0.8, p2[1] - Math.sin(an - 0.6) * L * 0.8); c.lineTo(p2[0], p2[1]); c.lineTo(p2[0] - Math.cos(an + 0.6) * L * 0.8, p2[1] - Math.sin(an + 0.6) * L * 0.8); c.stroke(); c.globalAlpha = 1; });
+      c.restore();
     }
     return { idx: ALL, zoom: ZOOM[name] || null, update(P) {
       const t = performance.now(); if (t0 == null) t0 = t;
-      c.setTransform(d, 0, 0, d, 0, 0); c.clearRect(0, 0, W, H);
-      const el = reduce ? 99 : (t - t0) / 1000; const A = el < 5 ? 1 : Math.max(0.36, 1 - (el - 5) / 1.5 * 0.64);
+      c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, cv.width, cv.height);
+      const el = reduce ? 99 : (t - t0) / 1000;
       const zs = buildZones(key, P, {});
-      const nz = P(4), hR = dist(nz, P(234)), hL = dist(nz, P(454)), av = (hR + hL) / 2 || 1, fac = {};
+      const nz = P(4), hR = dist(nz, P(234)), hL = dist(nz, P(454)), av = (hR + hL) / 2 || 1, fac = {}, fw = dist(P(234), P(454));
       [['R', hR], ['L', hL]].forEach(([k2, h]) => { const v = Math.max(0.25, Math.min(1.2, h / av)); FS[k2] = FS[k2] == null ? v : FS[k2] + (v - FS[k2]) * 0.25; fac[k2] = FS[k2]; });
+      // aparición: 1 s; intensidad alta 3 s; atenuación 1,6 s hasta 55 %
+      const A = el < 3.2 ? 1 : Math.max(0.88, 1 - (el - 3.2) / 1.2 * 0.12);
       for (const z of zs) { if (z.hidden) continue;
-        const ph = ease(el / 1.1), pp = persp(z, z.poly, P, fac); if (pp.a <= 0.01) continue;
-        const a = A * pp.a, cc = cen(pp.poly), poly = scl(pp.poly, cc, (0.55 + 0.45 * ph) * K);
-        const col = '201,181,245';
-        c.save(); c.beginPath(); poly.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath();
-        if (z.brow) { drawBrow(z, a, t, el); c.restore(); continue; }
-        const r = Math.max(...poly.map(p => dist(p, cc))); const g = c.createRadialGradient(cc[0], cc[1], 0, cc[0], cc[1], r); g.addColorStop(0, `rgba(${col},${0.34 * a})`); g.addColorStop(1, `rgba(${col},${0.05 * a})`);
-        if (!z.contour) { c.fillStyle = g; c.fill(); }
-        const eye = /^eye/.test(z.id || ''); c.setLineDash(z.contour ? [] : eye ? [2.4 * LW, 4.4 * LW] : [3 * LW, 5 * LW]); c.lineDashOffset = -t / 60; c.strokeStyle = `rgba(236,226,255,${0.85 * a})`; c.lineWidth = (z.contour ? 1.5 : eye ? 0.85 : 1.3) * LW; c.stroke(); c.setLineDash([]);
-        (z.dots || []).forEach((p, i) => { const s = (t / 900 + i * 0.2) % 1; c.strokeStyle = `rgba(240,232,255,${(1 - s) * 0.9 * a})`; c.lineWidth = LW; c.beginPath(); c.arc(p[0], p[1], (3 + s * 10) * K, 0, 7); c.stroke(); c.fillStyle = `rgba(240,232,255,${0.9 * a})`; c.beginPath(); c.arc(p[0], p[1], 2.2 * K, 0, 7); c.fill(); });
-        if (el > 0.8) (z.flow || []).forEach(([p0, p1], fi) => { for (let k = 0; k < 3; k++) { const s = ((t / 1500) + k / 3 + fi * 0.13) % 1, e = ease(s), p = lerp(p0, p1, e), q = lerp(p0, p1, Math.max(0, e - 0.14)); const al = Math.sin(Math.PI * s) * a; c.strokeStyle = `rgba(255,250,255,${al * 0.7})`; c.lineWidth = (/^eye/.test(z.id || '') ? 1.3 : 2) * LW; c.lineCap = 'round'; c.beginPath(); c.moveTo(q[0], q[1]); c.lineTo(p[0], p[1]); c.stroke(); c.fillStyle = `rgba(255,250,255,${al})`; c.beginPath(); c.arc(p[0], p[1], 2.6 * K, 0, 7); c.fill(); } });
+        const pp = persp(z, z.poly, P, fac); if (pp.a <= 0.01) continue;
+        const a = A * pp.a, ph = reduce ? 1 : ease(el / 1.1), cc = cen(pp.poly), poly = scl(pp.poly, cc, 0.55 + 0.45 * ph);
+        if (z.brow) { c.save(); c.setTransform(d, 0, 0, d, 0, 0); drawBrow(z, a, t, el); c.restore(); continue; }
+        if (!z.contour) {
+          const bl = fw * T.b * (z.soft ? 1.6 : 0.8);
+          lc.setTransform(1, 0, 0, 1, 0, 0); lc.globalCompositeOperation = 'source-over'; lc.clearRect(0, 0, lay.width, lay.height);
+          const bb = blob(poly, T.c, 1, bl, null);
+          lc.setTransform(d, 0, 0, d, 0, 0); lc.globalCompositeOperation = 'destination-out'; lc.globalAlpha = T.pearl ? 0.25 : 0.35; lc.fillStyle = pat; lc.fillRect(bb[0], bb[1], bb[2] - bb[0], bb[3] - bb[1]); lc.globalAlpha = 1; lc.globalCompositeOperation = 'source-over';
+          c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = Math.min(0.85, T.a) * (z.soft ? 0.62 : 1) * a * ph; c.drawImage(lay, 0, 0); c.globalAlpha = 1;
+        }
+        c.save(); c.setTransform(d, 0, 0, d, 0, 0);
+        c.beginPath(); poly.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath();
+        c.setLineDash([3, 5]); c.lineDashOffset = -t / 60; c.strokeStyle = 'rgba(236,226,255,' + (0.42 * a) + ')'; c.lineWidth = 1.1; c.stroke(); c.setLineDash([]);
+        (z.dots || []).forEach((p, i) => { const s = (t / 900 + i * 0.2) % 1; c.strokeStyle = 'rgba(240,232,255,' + ((1 - s) * 0.5 * a) + ')'; c.lineWidth = 1; c.beginPath(); c.arc(p[0], p[1], 3 + s * 10, 0, 7); c.stroke(); c.fillStyle = 'rgba(240,232,255,' + (0.55 * a) + ')'; c.beginPath(); c.arc(p[0], p[1], 2, 0, 7); c.fill(); });
+        if (el > 0.8) (z.flow || []).forEach(([p0, p1], fi) => { for (let k = 0; k < 3; k++) { const s = ((t / 1500) + k / 3 + fi * 0.13) % 1, e = ease(s), p = lerp(p0, p1, e), q = lerp(p0, p1, Math.max(0, e - 0.14)), al = Math.sin(Math.PI * s) * a * 0.55; c.strokeStyle = 'rgba(255,250,255,' + (al * 0.7) + ')'; c.lineWidth = 2; c.lineCap = 'round'; c.beginPath(); c.moveTo(q[0], q[1]); c.lineTo(p[0], p[1]); c.stroke(); c.fillStyle = 'rgba(255,250,255,' + al + ')'; c.beginPath(); c.arc(p[0], p[1], 2.6, 0, 7); c.fill(); } });
         c.restore();
       }
     } };
